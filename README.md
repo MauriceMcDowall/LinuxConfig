@@ -11,3 +11,4 @@ Added initial .bashrc file with Powerline configured
 ## Zsh
 Added initial .zshrc file
 Added oh-my-zsh folder
+Added zsh-syntax-highlighting
