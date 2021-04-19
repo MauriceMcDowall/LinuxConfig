@@ -76,6 +76,15 @@ Plug 'morhetz/gruvbox'
 " Initialize plugin system
 call plug#end()
 
+
+" Path to Python
+let g:python3_host_prog = '/usr/bin/python3'
+
+
+
+
+
+
 colorscheme gruvbox
 let g:airline_theme='gruvbox'
 

@@ -11,15 +11,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
     " File Explorer
-    Plug 'scrooloose/NERDTree'
+    Plug 'preservim/nerdtree' | 
+          \ Plug 'Xuyuanp/nerdtree-git-plugin'
     " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
 
-    Plug 'scrooloose/nerdtree' | 
-        \ Plug 'Xuyuanp/nerdtree-git-plugin'
-
     Plug 'preservim/nerdcommenter'
-
 "    Plug 'norcalli/nvim-colorizer.lua'
 
 
