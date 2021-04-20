@@ -1,114 +1,198 @@
-set nocompatible              " required
-filetype off                  " required
+" Optixal's Neovim Init.vim
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+""" Vim-Plug
+call plug#begin()
 
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" add all your plugins here (note older versions of Vundle
-" used Bundle instead of Plugin)
-
-" ...
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-" Specify a directory for plugins
-" - For Neovim: stdpath('data') . '/plugged'
-" - Avoid using standard Vim directory names like 'plugin'
-
-set encoding=utf-8
-set number "relativenumber 
-syntax enable
-set scrolloff=7
-set backspace=indent,eol,start
-
-" Python Specific Config
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
-set autoindent
-set fileformat=unix
-" set noswapfile
-
-" Plugin system
-call plug#begin('~/.vim/plugged')
-
-" Make sure you use single quotes
-
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-Plug 'junegunn/vim-easy-align'
-
-" Any valid git URL is allowed
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-
-" Multiple Plug commands can be written in a single line using | separators
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
-" On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-
-" Using a non-default branch
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-
-" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'fatih/vim-go', { 'tag': '*' }
-
-" Plugin options
-Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-
-" Plugin outside ~/.vim/plugged with post-update hook
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
-" Unmanaged plugin (manually installed and updated)
-Plug '~/my-prototype-plugin'
+" Aesthetics - Main
 Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'junegunn/seoul256.vim'
+Plug 'junegunn/vim-journal'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'nightsense/forgotten'
+Plug 'zaki/zazen'
 
-" Initialize plugin system
+" Aethetics - Additional
+Plug 'nightsense/nemo'
+Plug 'yuttie/hydrangea-vim'
+Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim'}
+Plug 'rhysd/vim-color-spring-night'
+
+
+" Functionalities
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'scrooloose/nerdcommenter'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'ervandew/supertab'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/vim-easy-align'
+Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-abolish'
+Plug 'Yggdroot/indentLine'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'chrisbra/Colorizer'
+Plug 'KabbAmine/vCoolor.vim'
+Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
+Plug 'vim-scripts/loremipsum'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'metakirby5/codi.vim'
+Plug 'dkarter/bullets.vim'
+
+" Entertainment
+"Plug 'ryanss/vim-hackernews'
+
 call plug#end()
 
+""" Python3 VirtualEnv
+let g:python3_host_prog = expand('~/.config/nvim/env/bin/python')
 
-" Path to Python
-let g:python3_host_prog = '/usr/bin/python3'
-
-
-
-
-
-
+""" Coloring
+syntax on
 colorscheme gruvbox
+set background=dark
+"highlight Comment gui=bold
+"highlight Pmenu guibg=white guifg=black gui=bold
+"highlight Normal gui=none
+"highlight NonText guibg=none
+
+" Opaque Background (Comment out to use terminal's profile)
+"set termguicolors
+
+
+""" Other Configurations
+filetype plugin indent on
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
+set incsearch ignorecase smartcase hlsearch
+set ruler laststatus=2 showcmd showmode
+set list listchars=trail:»,tab:»-
+set fillchars+=vert:\ 
+set wrap breakindent
+set encoding=utf-8
+set number
+set title
+
+""" Plugin Configurations
+
+" NERDTree
+let NERDTreeShowHidden=1
+let g:NERDTreeDirArrowExpandable = '↠'
+let g:NERDTreeDirArrowCollapsible = '↡'
+
+" Airline
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemode=':t'
 let g:airline_theme='gruvbox'
 
-if (has("termguicolors"))
-    set termguicolors
-endif
+tmap <Esc> <C-\><C-n>
+tmap <C-w> <Esc><C-w>
+"tmap <C-d> <Esc>:q<CR>
+autocmd BufWinEnter,WinEnter term://* startinsert
+autocmd BufLeave term://* stopinsert
 
-" lua require 'Colorizer'.setup()
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+" Disable documentation window
+set completeopt-=preview
 
-" NerdCommenter
-nmap <C-_> <Plug>NERDCommenterToggle
-vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
+" vim-pydocstring
+let g:pydocstring_doq_path = '~/.config/nvim/env/bin/doq'
 
-" NerdTree
-let NERDTreeQuitOnOpen=1
-let g:NERDTreeMinimalUI=1
-nmap <F2> :NerdTreeToggle<CR>
+" Supertab
+let g:SuperTabDefaultCompletionType = "<C-n>"
 
-" Tabs
-let g:airline#extensions#tableline#enabled=1
-let g:airline#extentions#tabline#fnamemode=':t'
-nmap <leader>1 :bp<CR>
-nmap <leader>2 :bn<CR>
-nmap <C-w> :bd<CR>
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<C-Space>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<C-x>"
+
+" EasyAlign
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+" indentLine
+let g:indentLine_char = '▏'
+let g:indentLine_color_gui = '#363949'
+
+" TagBar
+let g:tagbar_width = 30
+let g:tagbar_iconchars = ['↠', '↡']
+
+" fzf-vim
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'Type'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Character'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+""" Filetype-Specific Configurations
+
+" HTML, XML, Jinja
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType xml setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType htmldjango inoremap {{ {{  }}<left><left><left>
+autocmd FileType htmldjango inoremap {% {%  %}<left><left><left>
+autocmd FileType htmldjango inoremap {# {#  #}<left><left><left>
+
+" Markdown and Journal
+autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType journal setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 
-source $HOME/.config/nvim/vim-plug/plugins.vim
+""" Custom Mappings
+
+let mapleader=","
+nmap <leader>q :NERDTreeToggle<CR>
+nmap \ <leader>q
+nmap <leader>w :TagbarToggle<CR>
+nmap <leader>ee :Colors<CR>
+nmap <leader>ea :AirlineTheme 
+nmap <leader>r :so ~/.config/nvim/init.vim<CR>
+nmap <leader>t :call TrimWhitespace()<CR>
+xmap <leader>a gaip*
+nmap <leader>a gaip*
+nmap <leader>s <C-w>s<C-w>j:terminal<CR>
+nmap <leader>vs <C-w>v<C-w>l:terminal<CR>
+nmap <leader>d <Plug>(pydocstring)
+nmap <leader>f :Files<CR>
+nmap <leader>g :Goyo<CR>
+nmap <leader>h :RainbowParentheses!!<CR>
+nmap <leader>j :set filetype=journal<CR>
+nmap <leader>k :ColorToggle<CR>
+nmap <leader>l :Limelight!!<CR>
+xmap <leader>l :Limelight!!<CR>
+autocmd FileType python nmap <leader>x :0,$!~/.config/nvim/env/bin/python -m yapf<CR>
+"nmap <leader>n :HackerNews best<CR>J
+nmap <silent> <leader><leader> :noh<CR>
+nmap <Tab> :bnext<CR>
+nmap <S-Tab> :bprevious<CR>
+
