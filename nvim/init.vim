@@ -70,7 +70,7 @@ set background=dark
 "highlight NonText guibg=none
 
 " Opaque Background (Comment out to use terminal's profile)
-"set termguicolors
+set termguicolors
 
 
 """ Other Configurations
